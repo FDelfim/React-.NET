@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Atividade from './Atividade';
 
 const atvInicial = { id: 0, titulo: '', prioridade: 0, descricao: '' };
 
@@ -57,10 +56,10 @@ export default function AtividadeForm(props) {
                             <div className='col-md-6'>
                                 <label htmlFor='prioridade' className='form-label'>Prioridade</label>
                                 <select id='prioridade' name='prioridade' className='form-select' onChange={inputTextHandler} value={atividade.prioridade} placeholder='Selecione uma prioridade...'>
-                                    <option defaultValue='0'>Selecione uma opção...</option>
-                                    <option value='1'>Alta</option>
-                                    <option value='2'>Média</option>
-                                    <option value='3'>Baixa</option>
+                                    <option defaultValue='Undefined'>Selecione uma opção...</option>
+                                    <option value='Alta'>Alta</option>
+                                    <option value='Normal'>Média</option>
+                                    <option value='Baixa'>Baixa</option>
                                 </select>
                             </div>
                             <div className='col-md-12'>

@@ -34,11 +34,11 @@ namespace react.net.Controllers
 
 
         [HttpPost]
-        public IEnumerable<Atividade> Post(Atividade atividade)
+        public Atividade Post(Atividade atividade)
         {
             context.Atividades.Add(atividade);
             if(context.SaveChanges() > 0){
-                return context.Atividades;
+                return atividade;
             }else{
                 throw new Exception("Erro ao salvar atividade");
             }

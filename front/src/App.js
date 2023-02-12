@@ -3,18 +3,28 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import AtividadeForm from "./components/AtividadeForm";
 import AtividadeLista from "./components/AtividadeLista";
+import api from './api/atv';
 
 function App() {
-  const [index, setIndex] = useState(0);
   const [atividades, setAtividades] = useState([]);
   const [atividade, setAtividade] = useState({id: 0});
 
   useEffect(() => {
-    atividades.length <= 0 ? setIndex(1) : setIndex(Math.max.apply(Math, atividades.map((item => item.id))) + 1);
-  }, [atividades]);
+    const getAtividades = async () =>{
+      const todasAtividades = await getTodasAtividades();
+      if(todasAtividades) setAtividades(todasAtividades);
+    }
+    getAtividades();
+  }, []);
 
-  function addAtividade(atv) {
-    setAtividades([...atividades, { ...atv, id: index}]);
+  const getTodasAtividades = async () =>{
+    const response = await api.get('atividades');
+    return response.data;
+  }
+
+  const addAtividade = async (atv) => {
+    const response = await api.post('atividades', atv);
+    setAtividades([...atividades, response.data]);
   }
 
   function deleteAtv(id) {
